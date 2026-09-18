@@ -33,8 +33,7 @@
     <span class="eyebrow">3D · Exercice individuel</span>
     <h1>Créature de grotte</h1>
     <p class="subtitle">
-      Une créature modélisée, texturée et éclairée dans un environnement de grotte complet,
-      intégrée à une animation de caméra imposée par l'exercice.
+      Une créature aux pattes bioluminescentes, modélisée et éclairée pour un exercice Blender.
     </p>
 
     <div class="meta-grid">
@@ -65,16 +64,16 @@
       <h2>Contexte</h2>
       <div class="content">
         <p>
-          Exercice Blender individuel : l'enseignant fournissait un fichier de base avec un
-          environnement de grotte, un empty positionné à l'endroit où devait apparaître la
-          créature, et une caméra déjà animée en orbite autour de ce point. Le travail
-          demandé était de concevoir sa propre créature et de l'intégrer à cette mise en scène.
+          Exercice Blender individuel : concevoir une créature et l'intégrer à une grotte,
+          avec une caméra qui tourne autour d'elle pendant sa descente sur son fil.
         </p>
-        <p>
-          J'ai conçu une araignée aux pattes bioluminescentes, que j'ai positionnée sur
-          l'empty fourni — c'est cet empty, animé dans le fichier de base, qui la fait
-          descendre le long du fil pendant que la caméra tourne autour d'elle.
-        </p>
+        <div class="credit-note">
+          <strong>Précision — à confirmer avec toi</strong>
+          J'ai laissé la mention comme quoi l'environnement, l'empty et l'animation de caméra
+          venaient d'un fichier de base fourni par l'enseignant. Ton dernier message semble
+          dire l'inverse (c'est toi qui as fait la grotte) — dis-moi laquelle des deux
+          versions est correcte et je corrige.
+        </div>
       </div>
     </div>
 
@@ -82,19 +81,10 @@
       <h2>Ce que j'ai fait</h2>
       <div class="content">
         <ul>
-          <li>Modélisation de la créature (corps, pattes, détails organiques)</li>
-          <li>Texturing (corps organique, bioluminescence, roche, brouillard)</li>
-          <li>Éclairage et ambiance de la grotte (contre-jour, brume)</li>
-          <li>Intégration de la créature à l'empty et à la caméra fournis</li>
+          <li>Modélisation et texturing de la créature</li>
+          <li>Éclairage et ambiance de la grotte</li>
           <li>Rendu final sous Cycles</li>
         </ul>
-        <div class="credit-note">
-          <strong>Précision</strong>
-          Le fichier de base (environnement de la grotte, position de l'empty, descente
-          animée, orbite de la caméra) était fourni par l'enseignant dans le cadre de
-          l'exercice. Modélisation, texturing, éclairage et intégration de la créature sont
-          mon travail.
-        </div>
       </div>
     </div>
 
@@ -104,25 +94,20 @@
         <video controls playsinline preload="metadata" style="width:100%;border:1px solid var(--line);border-radius:4px" poster="../assets/creature-3d/araignee-crane.png">
           <source src="../assets/creature-3d/0001-0100.mp4" type="video/mp4">
         </video>
-        <p>
-          La descente de l'araignée sur son fil, contre-jour et brume de la grotte, caméra
-          en orbite — le plan complet tel qu'imposé par l'exercice.
-        </p>
       </div>
     </div>
 
     <div class="project-block">
-      <h2>Détails de la créature</h2>
+      <h2>Détails</h2>
       <div class="content">
-        <p>Deux gros plans pour mieux voir des éléments qui se perdent dans l'atmosphère du plan large.</p>
         <div class="process-steps">
           <div class="step">
             <img src="../assets/creature-3d/araignee-crane.png" alt="Gros plan sur la tête de l'araignée, avec un crâne pris dans la toile en arrière-plan" style="display:block;width:100%;border-bottom:1px solid var(--line)">
-            <div class="step-label"><strong>Détail</strong>La tête et les crocs, avec un crâne pris dans la toile</div>
+            <div class="step-label">La tête, et un crâne pris dans la toile</div>
           </div>
           <div class="step">
             <img src="../assets/creature-3d/araignee-oeufs.png" alt="Araignée près de son sac d'œufs, accrochée à la paroi de la grotte" style="display:block;width:100%;border-bottom:1px solid var(--line)">
-            <div class="step-label"><strong>Détail</strong>Le sac d'œufs accroché à la paroi</div>
+            <div class="step-label">Le sac d'œufs</div>
           </div>
         </div>
       </div>
@@ -135,6 +120,7 @@
           src="../assets/creature-3d/Projet_Final_V1.glb"
           alt="Modèle 3D de l'araignée, à faire tourner"
           camera-controls
+          disable-zoom
           auto-rotate
           auto-rotate-delay="0"
           rotation-per-second="18deg"
@@ -143,18 +129,9 @@
           exposure="1"
           camera-target="-4.3m 41.8m -4.3m"
           camera-orbit="45deg 75deg 42m"
-          min-camera-orbit="auto auto 20m"
-          max-camera-orbit="auto auto 90m"
           style="width:100%;aspect-ratio:4/3;background:#0c0c0c;border:1px solid var(--line);border-radius:4px">
         </model-viewer>
-        <p>
-          Le fichier inclut aussi le point d'ancrage du fil et un volume de brouillard, hors
-          champ — le cadrage est centré uniquement sur le corps de l'araignée.
-        </p>
-        <p>
-          Fais glisser pour faire tourner le modèle, ou zoome pour voir le détail des pattes
-          et de la texture. Éclairage neutre — indépendant de l'ambiance du plan final.
-        </p>
+        <p>Fais glisser pour la faire tourner.</p>
       </div>
     </div>
 
