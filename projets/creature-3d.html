@@ -64,16 +64,9 @@
       <h2>Contexte</h2>
       <div class="content">
         <p>
-          Exercice Blender individuel : concevoir une créature et l'intégrer à une grotte,
-          avec une caméra qui tourne autour d'elle pendant sa descente sur son fil.
+          Exercice Blender individuel : modéliser une créature et son environnement, avec
+          une caméra qui tourne autour d'elle pendant sa descente sur son fil.
         </p>
-        <div class="credit-note">
-          <strong>Précision — à confirmer avec toi</strong>
-          J'ai laissé la mention comme quoi l'environnement, l'empty et l'animation de caméra
-          venaient d'un fichier de base fourni par l'enseignant. Ton dernier message semble
-          dire l'inverse (c'est toi qui as fait la grotte) — dis-moi laquelle des deux
-          versions est correcte et je corrige.
-        </div>
       </div>
     </div>
 
@@ -81,8 +74,8 @@
       <h2>Ce que j'ai fait</h2>
       <div class="content">
         <ul>
-          <li>Modélisation et texturing de la créature</li>
-          <li>Éclairage et ambiance de la grotte</li>
+          <li>Modélisation de la créature et de la grotte</li>
+          <li>Texturing et éclairage</li>
           <li>Rendu final sous Cycles</li>
         </ul>
       </div>
@@ -113,14 +106,13 @@
       </div>
     </div>
 
-    <div class="project-block">
+    <div class="project-block full">
       <h2>Modèle interactif</h2>
       <div class="content">
         <model-viewer
           src="../assets/creature-3d/Projet_Final_V1.glb"
           alt="Modèle 3D de l'araignée, à faire tourner"
           camera-controls
-          disable-zoom
           auto-rotate
           auto-rotate-delay="0"
           rotation-per-second="18deg"
@@ -129,9 +121,11 @@
           exposure="1"
           camera-target="-4.3m 41.8m -4.3m"
           camera-orbit="45deg 75deg 42m"
-          style="width:100%;aspect-ratio:4/3;background:#0c0c0c;border:1px solid var(--line);border-radius:4px">
+          min-camera-orbit="auto auto 15m"
+          max-camera-orbit="auto auto 100m"
+          style="width:100%;aspect-ratio:16/9;background:#0c0c0c;border:1px solid var(--line);border-radius:4px">
         </model-viewer>
-        <p>Fais glisser pour la faire tourner.</p>
+        <p>Fais glisser pour la faire tourner, zoome pour voir le détail.</p>
       </div>
     </div>
 

@@ -501,6 +501,15 @@ p {
   border-top: none;
 }
 
+.project-block.full {
+  grid-template-columns: 1fr;
+}
+
+.project-block.full h2 {
+  position: static;
+  margin-bottom: 0.2rem;
+}
+
 .project-block h2 {
   font-family: var(--font-body);
   font-size: 0.78rem;
