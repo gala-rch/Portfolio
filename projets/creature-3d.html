@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3/dist/model-viewer.min.js"></script>
 </head>
 <body>
 
@@ -130,9 +131,23 @@
     <div class="project-block">
       <h2>Modèle interactif</h2>
       <div class="content">
-        <div class="media-placeholder wide">
-          <div><strong>À venir</strong>L'export .glb reçu ne contient pas l'araignée (juste un objet "Fumée" de la scène) — à réexporter avec le bon objet sélectionné.</div>
-        </div>
+        <model-viewer
+          src="../assets/creature-3d/Projet_Final_V1.glb"
+          alt="Modèle 3D de l'araignée, à faire tourner"
+          camera-controls
+          auto-rotate
+          auto-rotate-delay="0"
+          rotation-per-second="18deg"
+          interaction-prompt="none"
+          shadow-intensity="1"
+          exposure="1"
+          camera-orbit="45deg 75deg 105%"
+          style="width:100%;aspect-ratio:4/3;background:#0c0c0c;border:1px solid var(--line);border-radius:4px">
+        </model-viewer>
+        <p>
+          Fais glisser pour faire tourner le modèle, ou zoome pour voir le détail des pattes
+          et de la texture. Éclairage neutre — indépendant de l'ambiance du plan final.
+        </p>
       </div>
     </div>
 
