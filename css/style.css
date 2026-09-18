@@ -14,6 +14,10 @@
 
   --font-display: "Archivo", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-mono: "Inter", sans-serif;
+
+  --header-bg: rgba(244, 242, 237, 0.92);
+  --placeholder-alt: #ece8df;
 
   --container: 1180px;
   --gutter: clamp(1.25rem, 4vw, 3rem);
@@ -79,7 +83,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(244, 242, 237, 0.92);
+  background: var(--header-bg);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
 }
@@ -306,8 +310,8 @@ p {
       135deg,
       var(--bg) 0px,
       var(--bg) 10px,
-      #ece8df 10px,
-      #ece8df 20px
+      var(--placeholder-alt) 10px,
+      var(--placeholder-alt) 20px
     );
   border-bottom: 1px solid var(--line);
   display: flex;
@@ -766,4 +770,79 @@ p {
   .photo-strip {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* ==========================================================================
+   Univers par projet
+   Chaque thème ne redéfinit que les tokens : la structure reste identique.
+   ========================================================================== */
+
+/* ---------- Eli — HUD sci-fi / surveillance ---------- */
+
+body[data-theme="eli"] {
+  --bg: #0a0d0a;
+  --bg-alt: #11150f;
+  --fg: #e6f2ea;
+  --muted: #7c8f82;
+  --line: #223026;
+  --accent: #39e07a;
+  --accent-soft: rgba(57, 224, 122, 0.12);
+  --header-bg: rgba(10, 13, 10, 0.88);
+  --placeholder-alt: #151c16;
+  --font-display: "Orbitron", sans-serif;
+  --font-mono: "Space Mono", monospace;
+}
+
+body[data-theme="eli"] .eyebrow,
+body[data-theme="eli"] .tag,
+body[data-theme="eli"] .meta-grid .value,
+body[data-theme="eli"] .step-label {
+  font-family: var(--font-mono);
+}
+
+body[data-theme="eli"] .hero,
+body[data-theme="eli"] .project-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+body[data-theme="eli"] .hero::before,
+body[data-theme="eli"] .project-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 34px 34px;
+  background-position: center top;
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+body[data-theme="eli"] .tag {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-alt);
+}
+
+body[data-theme="eli"] .btn {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #05130a;
+}
+
+body[data-theme="eli"] .btn:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+}
+
+body[data-theme="eli"] .media-placeholder {
+  color: var(--accent);
+  border-color: var(--line);
+}
+
+body[data-theme="eli"] .media-placeholder strong {
+  color: var(--fg);
 }
