@@ -1029,3 +1029,58 @@ body[data-theme="lento"] .credit-note {
   background: var(--accent-soft);
   border-left-color: var(--accent);
 }
+
+/* Araignée de grotte: cave dark, the spider's own teal rim-light as accent, web-strand texture */
+body[data-theme="creature"] {
+  --bg: #0c0f0b;
+  --bg-alt: #12160f;
+  --fg: #e7e9dd;
+  --muted: #7e8a76;
+  --line: #232a1d;
+  --accent: #5fe0c4;
+  --accent-soft: rgba(95, 224, 196, 0.12);
+  --header-bg: rgba(12, 15, 11, 0.88);
+  --placeholder-alt: #171c11;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+body[data-theme="creature"] .eyebrow,
+body[data-theme="creature"] .meta-grid .value,
+body[data-theme="creature"] .step-label {
+  font-family: var(--font-mono);
+}
+
+body[data-theme="creature"] .project-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+body[data-theme="creature"] .project-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    repeating-conic-gradient(from 0deg at 12% 0%, var(--line) 0deg 0.5deg, transparent 0.5deg 12deg),
+    repeating-radial-gradient(circle at 12% 0%, var(--line) 0, var(--line) 1px, transparent 1px, transparent 46px);
+  opacity: 0.6;
+  -webkit-mask-image: radial-gradient(circle at 12% 0%, black 0%, transparent 65%);
+  mask-image: radial-gradient(circle at 12% 0%, black 0%, transparent 65%);
+}
+
+body[data-theme="creature"] .project-block h2 {
+  color: var(--accent);
+}
+
+body[data-theme="creature"] model-viewer {
+  --poster-color: transparent;
+}
+
+body[data-theme="creature"] .process-steps .step {
+  background: var(--bg-alt);
+}
+
+body[data-theme="creature"] .credit-note {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
