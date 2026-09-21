@@ -575,13 +575,13 @@ p {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  gap: 1.5rem 3rem;
+  gap: 1.5rem 2rem;
   margin-top: 1.6rem;
   padding: 0.5rem 0 1.5rem;
 }
 
 .scatter-board .scatter-item {
-  flex: 0 1 260px;
+  flex: 0 1 190px;
 }
 
 .scatter-board img {
@@ -591,6 +591,14 @@ p {
   filter: drop-shadow(0 16px 24px rgba(21, 19, 15, 0.16));
 }
 
+.scatter-board .scatter-caption {
+  display: block;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
 .scatter-board .scatter-item:nth-child(1) {
   transform: rotate(-3deg);
   margin-top: 1.5rem;
@@ -598,13 +606,32 @@ p {
 
 .scatter-board .scatter-item:nth-child(2) {
   transform: rotate(2deg);
-  flex-basis: 220px;
   align-self: flex-start;
 }
 
 .scatter-board .scatter-item:nth-child(3) {
   transform: rotate(-1.5deg);
   margin-top: 2.5rem;
+}
+
+.scatter-board .scatter-item:nth-child(4) {
+  transform: rotate(2.5deg);
+  margin-top: 0.6rem;
+}
+
+/* Keep every piece on one line past a certain width, and let it run past the margin */
+@media (min-width: 1000px) {
+  .scatter-board {
+    flex-wrap: nowrap;
+    margin-right: calc(-1 * var(--gutter));
+  }
+}
+
+/* A real photo among the cutouts: framed like a print, not floating like the cutouts */
+.scatter-board .scatter-item--photo img {
+  filter: none;
+  border: 6px solid var(--bg-alt);
+  box-shadow: 0 12px 22px rgba(21, 19, 15, 0.22);
 }
 
 /* Cutout images with real transparency: no card frame, let them float on the page */
@@ -917,4 +944,88 @@ body[data-theme="eli"] .media-placeholder {
 
 body[data-theme="eli"] .media-placeholder strong {
   color: var(--fg);
+}
+
+/* Lento e Inseguro: kraft cardboard, cereal-box red, felt green — the stop-motion set's own palette */
+body[data-theme="lento"] {
+  --bg: #efe3c8;
+  --bg-alt: #f8f1de;
+  --fg: #2b2013;
+  --muted: #8a7654;
+  --line: #ddc89b;
+  --accent: #d6472a;
+  --accent-soft: #f7dccb;
+  --header-bg: rgba(239, 227, 200, 0.92);
+  --placeholder-alt: #e7d6ac;
+  --font-hand: "Caveat", cursive;
+}
+
+body[data-theme="lento"] .project-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+body[data-theme="lento"] .project-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--line) 0,
+    var(--line) 2px,
+    transparent 2px,
+    transparent 15px
+  );
+  opacity: 0.45;
+  -webkit-mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+}
+
+body[data-theme="lento"] .project-hero > .wrap > .eyebrow {
+  font-family: var(--font-hand);
+  text-transform: none;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+}
+
+body[data-theme="lento"] .project-block h2 {
+  font-family: var(--font-hand);
+  text-transform: none;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+}
+
+body[data-theme="lento"] .scatter-board .scatter-caption {
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+body[data-theme="lento"] .scatter-board .scatter-item {
+  position: relative;
+}
+
+body[data-theme="lento"] .scatter-board .scatter-item--photo::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 64px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transform: translateX(-50%) rotate(-5deg);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+body[data-theme="lento"] .credit-note {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
 }
