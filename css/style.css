@@ -570,6 +570,43 @@ p {
   font-size: 0.85rem;
 }
 
+/* Scattered moodboard layout: transparent cutouts, slightly rotated, no grid */
+.scatter-board {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.5rem 3rem;
+  margin-top: 1.6rem;
+  padding: 0.5rem 0 1.5rem;
+}
+
+.scatter-board .scatter-item {
+  flex: 0 1 260px;
+}
+
+.scatter-board img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 16px 24px rgba(21, 19, 15, 0.16));
+}
+
+.scatter-board .scatter-item:nth-child(1) {
+  transform: rotate(-3deg);
+  margin-top: 1.5rem;
+}
+
+.scatter-board .scatter-item:nth-child(2) {
+  transform: rotate(2deg);
+  flex-basis: 220px;
+  align-self: flex-start;
+}
+
+.scatter-board .scatter-item:nth-child(3) {
+  transform: rotate(-1.5deg);
+  margin-top: 2.5rem;
+}
+
 /* Cutout images with real transparency: no card frame, let them float on the page */
 .process-steps .step.cutout {
   border: none;
