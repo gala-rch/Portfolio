@@ -1219,21 +1219,26 @@ body[data-theme="baile"] .project-hero .subtitle {
 
 .bc-inspis img:nth-child(1) {
   grid-column: 1 / -1;
+  grid-row: 1;
   width: 88%;
   transform: rotate(-1.5deg);
 }
 
+/* Painting tucks under the right side only: The Substance's title sits bottom-left */
 .bc-inspis img:nth-child(2) {
-  margin-top: -1.2rem;
-  margin-left: 4%;
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: -2.2rem;
+  margin-left: -4%;
   transform: rotate(2deg);
   position: relative;
   z-index: 1;
 }
 
 .bc-inspis img:nth-child(3) {
-  margin-top: 1.6rem;
-  margin-left: -6%;
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 1.4rem;
   transform: rotate(-2.5deg);
   position: relative;
   z-index: 2;
@@ -1241,9 +1246,10 @@ body[data-theme="baile"] .project-hero .subtitle {
 
 .bc-inspis img:nth-child(4) {
   grid-column: 1 / -1;
+  grid-row: 3;
   justify-self: end;
   width: 72%;
-  margin-top: -1.4rem;
+  margin-top: -1rem;
   transform: rotate(1.5deg);
   position: relative;
   z-index: 3;
