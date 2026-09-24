@@ -1430,34 +1430,8 @@ body[data-theme="baile"] .project-hero .subtitle {
   }
 }
 
-.bc-colors {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.bc-palette {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.9rem;
-}
-
-.bc-palette li {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  color: var(--gold);
-}
-
-.bc-palette span {
-  width: 32px;
-  height: 34px;
-  border-radius: 50% 50% 50% 50% / 56% 56% 44% 44%;
-  background: var(--c);
-  box-shadow: inset 0 -3px 6px rgba(59, 45, 42, 0.12), 0 3px 8px rgba(59, 45, 42, 0.14);
+.meta-grid .value-note {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--muted);
 }
