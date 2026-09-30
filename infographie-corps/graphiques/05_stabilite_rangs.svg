@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="520pt" height="250pt" viewBox="0 0 520 250" font-family="Helvetica, Arial, sans-serif">
+<title>Stabilité des rangs</title>
+<g id="fond"><rect width="520" height="250" fill="#fbf7ee"/></g>
+<g id="stabilite-parole-et-mastication">
+<text x="14.0" y="16.0" font-size="7.5" text-anchor="start" fill="#1a1a1a" font-weight="bold">Parole et mastication</text>
+<line x1="24" y1="50.0" x2="119" y2="50.0" stroke="#dcd9d0" stroke-width="0.4"/>
+<text x="12.0" y="52.0" font-size="5" text-anchor="start" fill="#6b6962">1</text>
+<line x1="24" y1="96.8" x2="119" y2="96.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<text x="12.0" y="98.8" font-size="5" text-anchor="start" fill="#6b6962">10</text>
+<line x1="24" y1="148.8" x2="119" y2="148.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<text x="12.0" y="150.8" font-size="5" text-anchor="start" fill="#6b6962">20</text>
+<line x1="24" y1="200.8" x2="119" y2="200.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<text x="12.0" y="202.8" font-size="5" text-anchor="start" fill="#6b6962">30</text>
+<rect x="25.0" y="76.0" width="6" height="20.8" rx="3" fill="#2a78d6" opacity="0.25"/>
+<rect x="46.8" y="76.0" width="6" height="83.2" rx="3" fill="#2a78d6" opacity="0.25"/>
+<rect x="68.5" y="50.0" width="6" height="36.4" rx="3" fill="#2a78d6" opacity="0.25"/>
+<rect x="90.2" y="65.6" width="6" height="20.8" rx="3" fill="#2a78d6" opacity="0.25"/>
+<rect x="112.0" y="81.1" width="6" height="20.9" rx="3" fill="#2a78d6" opacity="0.25"/>
+<path d="M28.0,81.2 C38.9,81.2 38.9,107.2 49.8,107.2 C60.6,107.2 60.6,50.0 71.5,50.0 C82.4,50.0 82.4,81.2 93.2,81.2 C104.1,81.2 104.1,91.6 115.0,91.6" fill="none" stroke="#2a78d6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="28.0" cy="81.2" r="2" fill="#2a78d6"/>
+<circle cx="49.8" cy="107.2" r="2" fill="#2a78d6"/>
+<circle cx="71.5" cy="50.0" r="2" fill="#2a78d6"/>
+<circle cx="93.2" cy="81.2" r="2" fill="#2a78d6"/>
+<circle cx="115.0" cy="91.6" r="2" fill="#2a78d6"/>
+<text x="28.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Difficulté</text>
+<text x="49.8" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Colère</text>
+<text x="71.5" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Gratitude</text>
+<text x="93.2" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Prix</text>
+<text x="115.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Dédomm.</text>
+</g>
+<g id="stabilite-les-10-doigts">
+<text x="141.0" y="16.0" font-size="7.5" text-anchor="start" fill="#1a1a1a" font-weight="bold">Les 10 doigts</text>
+<line x1="151" y1="50.0" x2="246" y2="50.0" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="151" y1="96.8" x2="246" y2="96.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="151" y1="148.8" x2="246" y2="148.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="151" y1="200.8" x2="246" y2="200.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<rect x="152.0" y="81.2" width="6" height="20.8" rx="3" fill="#eb6834" opacity="0.25"/>
+<rect x="173.8" y="50.0" width="6" height="57.2" rx="3" fill="#eb6834" opacity="0.25"/>
+<rect x="195.5" y="70.8" width="6" height="67.6" rx="3" fill="#eb6834" opacity="0.25"/>
+<rect x="217.2" y="107.2" width="6" height="31.2" rx="3" fill="#eb6834" opacity="0.25"/>
+<rect x="239.0" y="91.6" width="6" height="26.0" rx="3" fill="#eb6834" opacity="0.25"/>
+<path d="M155.0,96.8 C165.9,96.8 165.9,60.4 176.8,60.4 C187.6,60.4 187.6,96.8 198.5,96.8 C209.4,96.8 209.4,128.0 220.2,128.0 C231.1,128.0 231.1,102.0 242.0,102.0" fill="none" stroke="#eb6834" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="155.0" cy="96.8" r="2" fill="#eb6834"/>
+<circle cx="176.8" cy="60.4" r="2" fill="#eb6834"/>
+<circle cx="198.5" cy="96.8" r="2" fill="#eb6834"/>
+<circle cx="220.2" cy="128.0" r="2" fill="#eb6834"/>
+<circle cx="242.0" cy="102.0" r="2" fill="#eb6834"/>
+<text x="155.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Difficulté</text>
+<text x="176.8" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Colère</text>
+<text x="198.5" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Gratitude</text>
+<text x="220.2" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Prix</text>
+<text x="242.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Dédomm.</text>
+</g>
+<g id="stabilite-les-2-pieds">
+<text x="268.0" y="16.0" font-size="7.5" text-anchor="start" fill="#1a1a1a" font-weight="bold">Les 2 pieds</text>
+<line x1="278" y1="50.0" x2="373" y2="50.0" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="278" y1="96.8" x2="373" y2="96.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="278" y1="148.8" x2="373" y2="148.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="278" y1="200.8" x2="373" y2="200.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<rect x="279.0" y="76.0" width="6" height="20.8" rx="3" fill="#1baf7a" opacity="0.25"/>
+<rect x="300.8" y="102.0" width="6" height="72.8" rx="3" fill="#1baf7a" opacity="0.25"/>
+<rect x="322.5" y="91.6" width="6" height="57.2" rx="3" fill="#1baf7a" opacity="0.25"/>
+<rect x="344.2" y="86.4" width="6" height="20.8" rx="3" fill="#1baf7a" opacity="0.25"/>
+<rect x="366.0" y="55.2" width="6" height="36.4" rx="3" fill="#1baf7a" opacity="0.25"/>
+<path d="M282.0,86.4 C292.9,86.4 292.9,138.4 303.8,138.4 C314.6,138.4 314.6,122.8 325.5,122.8 C336.4,122.8 336.4,91.6 347.2,91.6 C358.1,91.6 358.1,70.8 369.0,70.8" fill="none" stroke="#1baf7a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="282.0" cy="86.4" r="2" fill="#1baf7a"/>
+<circle cx="303.8" cy="138.4" r="2" fill="#1baf7a"/>
+<circle cx="325.5" cy="122.8" r="2" fill="#1baf7a"/>
+<circle cx="347.2" cy="91.6" r="2" fill="#1baf7a"/>
+<circle cx="369.0" cy="70.8" r="2" fill="#1baf7a"/>
+<text x="282.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Difficulté</text>
+<text x="303.8" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Colère</text>
+<text x="325.5" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Gratitude</text>
+<text x="347.2" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Prix</text>
+<text x="369.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Dédomm.</text>
+</g>
+<g id="stabilite-parties-génitales">
+<text x="395.0" y="16.0" font-size="7.5" text-anchor="start" fill="#1a1a1a" font-weight="bold">Parties génitales</text>
+<line x1="405" y1="50.0" x2="500" y2="50.0" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="405" y1="96.8" x2="500" y2="96.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="405" y1="148.8" x2="500" y2="148.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<line x1="405" y1="200.8" x2="500" y2="200.8" stroke="#dcd9d0" stroke-width="0.4"/>
+<rect x="406.0" y="117.6" width="6" height="31.2" rx="3" fill="#4a3aa7" opacity="0.25"/>
+<rect x="427.8" y="55.2" width="6" height="72.8" rx="3" fill="#4a3aa7" opacity="0.25"/>
+<rect x="449.5" y="107.2" width="6" height="62.4" rx="3" fill="#4a3aa7" opacity="0.25"/>
+<rect x="471.2" y="91.6" width="6" height="36.4" rx="3" fill="#4a3aa7" opacity="0.25"/>
+<rect x="493.0" y="65.6" width="6" height="36.4" rx="3" fill="#4a3aa7" opacity="0.25"/>
+<path d="M409.0,148.8 C419.9,148.8 419.9,86.4 430.8,86.4 C441.6,86.4 441.6,154.0 452.5,154.0 C463.4,154.0 463.4,107.2 474.2,107.2 C485.1,107.2 485.1,86.4 496.0,86.4" fill="none" stroke="#4a3aa7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="409.0" cy="148.8" r="2" fill="#4a3aa7"/>
+<circle cx="430.8" cy="86.4" r="2" fill="#4a3aa7"/>
+<circle cx="452.5" cy="154.0" r="2" fill="#4a3aa7"/>
+<circle cx="474.2" cy="107.2" r="2" fill="#4a3aa7"/>
+<circle cx="496.0" cy="86.4" r="2" fill="#4a3aa7"/>
+<text x="409.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Difficulté</text>
+<text x="430.8" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Colère</text>
+<text x="452.5" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Gratitude</text>
+<text x="474.2" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Prix</text>
+<text x="496.0" y="34.0" font-size="4.6" text-anchor="middle" fill="#6b6962">Dédomm.</text>
+</g>
+<text x="12.0" y="238.0" font-size="6" text-anchor="start" fill="#6b6962">Bande claire = intervalle à 95 % du rang (bootstrap, 2000 tirages). Bande longue = rang peu fiable : ne pas bâtir une annotation dessus.</text></svg>
