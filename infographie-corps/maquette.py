@@ -147,10 +147,12 @@ def panneau(rangs, grp, ox, oy, pw, ph):
     y = oy + 24
     for n, partie, _, titre, texte in ANNOT[grp]:
         c = col if partie == vedette else SECONDAIRE.get(partie, col)
-        g.append(pastille(ox + 5, y - 2.5, n, c))
+        y_debut = y
         g.append(t(ox + 14, y, titre, 8, COND, weight="bold"))
         p, y = para(ox + 14, y + 9, texte, 6.8, pw - 18)
         g.append(p)
+        # filet de couleur à gauche du texte (relie l'annotation au ruban)
+        g.append(f'<rect x="{ox + 3}" y="{y_debut - 7:.1f}" width="2.5" height="{y - y_debut + 2:.1f}" fill="{c}"/>')
         y += 4
 
     # graphique
@@ -161,7 +163,7 @@ def panneau(rangs, grp, ox, oy, pw, ph):
     Y = lambda r: top + (r - 1) * pas
     for x, c in zip(xs, CRIT_COURT):
         g.append(f'<line x1="{x:.1f}" y1="{top - 4:.1f}" x2="{x:.1f}" y2="{Y(35) + 4:.1f}" stroke="{ENCRE_2}" stroke-width="0.3" stroke-dasharray="0.8 1.6"/>')
-        g.append(t(x, top - 8, c, 6.5, COND, "middle", ENCRE_2))
+        g.append(t(x, top - 13, c, 6.5, COND, "middle", ENCRE_2))
     membres = rangs[rangs.groupe == grp]
     for p, r in rangs[rangs.groupe != grp].iterrows():
         g.append(ruban(xs, [Y(r[c]) for c in CRIT], GRIS_CTX, 0.8))
@@ -178,10 +180,11 @@ def panneau(rangs, grp, ox, oy, pw, ph):
             fort = p == vedette or p in SECONDAIRE
             c, w = (ENCRE, "bold") if fort else (ENCRE_2, "normal")
             g.append(t(x, y + 2, p, 5.8, COND, anc, c, w))
-    # repères numérotés posés sur les rubans
-    for n, partie, k, _, _ in ANNOT[grp]:
-        c = col if partie == vedette else SECONDAIRE.get(partie, col)
-        g.append(pastille(xs[k], Y(membres.loc[partie, CRIT[k]]), n, c))
+    # rang écrit au-dessus de chaque point du ruban coloré
+    for x, k in zip(xs, CRIT):
+        r = int(membres.loc[vedette, k])
+        g.append(f'<circle cx="{x:.1f}" cy="{Y(r):.1f}" r="2.4" fill="{col}" stroke="{FOND}" stroke-width="0.7"/>')
+        g.append(t(x, Y(r) - 4.5, r, 6.5, COND, "middle", ENCRE, "bold"))
     g.append("</g>")
     return "\n".join(g)
 
