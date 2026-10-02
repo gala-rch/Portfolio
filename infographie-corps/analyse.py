@@ -154,22 +154,37 @@ def large(t, valeur, criteres):
 
 def mouvements(rangs):
     """Mesure à quel point chaque partie change de rang d'un critère à l'autre."""
+    # Convention de signe : + = la partie MONTE (gagne des places, devient plus
+    # précieuse), − = elle DESCEND. Un rang qui passe de 8 à 21 donne donc −13.
     r = rangs[[CRITERES[c] for c in CRITERES]]
-    pas = r.diff(axis=1).iloc[:, 1:]            # variation entre colonnes voisines
-    noms_pas = [f"{a} → {b}" for a, b in zip(r.columns[:-1], r.columns[1:])]
-    pas.columns = noms_pas
+    court = dict(zip(r.columns, ["Difficulté", "Colère", "Gratitude", "Prix", "Dédomm."]))
     m = pd.DataFrame(index=r.index)
     m["groupe"] = rangs["groupe"]
-    m["rang_min"] = r.min(axis=1)
-    m["rang_max"] = r.max(axis=1)
-    m["amplitude"] = m["rang_max"] - m["rang_min"]
-    m["cumul_des_sauts"] = pas.abs().sum(axis=1)  # distance parcourue par le ruban
-    idx = pas.abs().values.argmax(axis=1)
-    m["plus_gros_saut"] = [pas.iloc[i, j] for i, j in enumerate(idx)]
-    m["ou"] = [noms_pas[j] for j in idx]
-    m["difficulte_vers_dedommagement"] = r.iloc[:, -1] - r.iloc[:, 0]
-    m = m.join(pas)
-    return m.sort_values("cumul_des_sauts", ascending=False)
+
+    # 1) Amplitude : écart entre le meilleur et le pire rang, TOUS critères
+    #    confondus (ne dépend pas de l'ordre des colonnes). Mesure principale.
+    m["meilleur_rang"] = r.min(axis=1)
+    m["critere_du_meilleur"] = r.idxmin(axis=1).map(court)
+    m["pire_rang"] = r.max(axis=1)
+    m["critere_du_pire"] = r.idxmax(axis=1).map(court)
+    m["amplitude"] = m["pire_rang"] - m["meilleur_rang"]
+    m["ecart_type_des_rangs"] = r.std(axis=1).round(1)   # départage les ex æquo
+
+    # 2) Zigzag : somme des montées et descentes entre colonnes VOISINES.
+    #    Dépend de l'ordre de l'affiche ; mesure ce que l'œil voit sur les rubans.
+    voisins = -r.diff(axis=1).iloc[:, 1:]
+    voisins.columns = [f"voisins · {court[a]} → {court[b]}"
+                       for a, b in zip(r.columns[:-1], r.columns[1:])]
+    m["zigzag_sur_le_graphique"] = voisins.abs().sum(axis=1)
+
+    # 3) Tous les couples de critères (10 comparaisons), voisins ou non.
+    cols = list(r.columns)
+    for i, a in enumerate(cols):
+        for b in cols[i + 1:]:
+            m[f"{court[a]} → {court[b]}"] = r[a] - r[b]
+
+    m = m.join(voisins)
+    return m.sort_values(["amplitude", "ecart_type_des_rangs"], ascending=False)
 
 
 def par_sexe(d):
@@ -228,7 +243,7 @@ def exporter(brut, d, t, t_bonus, rangs, moyennes, mouv, sexe, n_sexe, boot, com
         "Rang de chaque partie (1 = la plus précieuse) pour les 5 critères de l'affiche. C'est la table qui sert à dessiner les rubans.",
         "Moyenne des notes. Attention : Prix et Dédommagement vont de 0 à 10, les 3 autres de 0 à 100.",
         "Format long : une ligne par critère × partie avec moyenne, médiane, écart-type, n et rang.",
-        "Les parties qui bougent le plus. cumul_des_sauts = distance totale parcourue par le ruban ; amplitude = rang max − rang min.",
+        "Les parties qui bougent le plus, triées par amplitude (pire rang − meilleur rang, tous critères confondus). Signe des écarts : + = la partie MONTE (devient plus précieuse), − = elle DESCEND. Colonnes « A → B » : les 10 couples de critères ; colonnes « voisins · » : seulement les colonnes côte à côte sur l'affiche ; zigzag = somme de ces sauts voisins (ce que l'œil voit sur les rubans).",
         "Rang moyen (sur les 5 critères) chez les hommes et chez les femmes. Écart négatif = partie plus précieuse pour les hommes. ~20 personnes par case : prudence.",
         "Nombre de participants par critère et par sexe après filtrage.",
         "Intervalle à 95 % du rang par bootstrap. Si deux intervalles se chevauchent, l'ordre entre ces deux parties n'est pas solide.",
@@ -306,8 +321,8 @@ def main():
     print("Rangs (1 = la plus précieuse) :")
     print(rangs.drop(columns="ordre_affiche").to_string(), "\n")
     print("Parties qui bougent le plus :")
-    print(mouv[["groupe", "rang_min", "rang_max", "amplitude", "cumul_des_sauts",
-                "plus_gros_saut", "ou"]].head(12).to_string(), "\n")
+    print(mouv[["meilleur_rang", "critere_du_meilleur", "pire_rang", "critere_du_pire",
+                "amplitude", "ecart_type_des_rangs", "zigzag_sur_le_graphique"]].head(10).to_string(), "\n")
     print("Écarts hommes / femmes (rang moyen) :")
     print(pd.concat([sexe.head(6), sexe.tail(6)])[
         ["rang_moyen_hommes", "rang_moyen_femmes", "ecart_H_moins_F"]].round(1).to_string())

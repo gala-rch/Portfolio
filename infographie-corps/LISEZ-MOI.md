@@ -35,8 +35,12 @@ Les réglages (filtre oui/non, parties mises en avant, couleurs) sont en haut de
    On ne compare donc jamais les valeurs d'un critère à l'autre, seulement les **rangs**.
 5. **Calcul** : pour chaque critère, moyenne des notes de chaque partie, puis classement de 1 (moyenne la plus haute = la plus précieuse) à 35.
    La médiane est aussi calculée mais inutilisable pour classer : beaucoup de parties ont une médiane de 100 (tout le monde met le maximum).
-6. **Mouvements** (onglet `mouvements`) : pour chaque partie, `cumul_des_sauts` = somme des montées et descentes du ruban d'une colonne à l'autre.
-   C'est la mesure « qui bouge le plus ».
+6. **Mouvements** (onglet `mouvements`). **Signe : + = la partie monte (devient plus précieuse), − = elle descend.**
+   - `amplitude` = pire rang − meilleur rang, en comparant **tous** les critères entre eux. C'est la mesure principale, et elle ne dépend pas de l'ordre des colonnes.
+     Les ex æquo sont départagés par `ecart_type_des_rangs`.
+   - Colonnes `A → B` : les 10 couples de critères possibles, voisins ou non.
+   - `zigzag_sur_le_graphique` = somme des sauts entre colonnes **voisines** de l'affiche (colonnes `voisins ·`).
+     Cette mesure dépend de l'ordre des colonnes : elle dit combien le ruban ondule à l'œil, pas combien la partie change vraiment.
 7. **Hommes / femmes** (onglet `hommes_femmes`) : rangs recalculés séparément par sexe, puis moyennés sur les 5 critères.
 8. **Stabilité** (onglet `stabilite_rangs`) : bootstrap. On retire au hasard, avec remise, les ~40 répondants d'un critère,
    on recalcule les rangs, 2000 fois. On garde l'intervalle qui contient 95 % des rangs obtenus.
@@ -51,15 +55,17 @@ Les réglages (filtre oui/non, parties mises en avant, couleurs) sont en haut de
 
 ## Ce que disent les données
 
-### Les parties qui bougent le plus (cumul des sauts)
-| Partie | Rangs (Diff. → Colère → Gratitude → Prix → Dédomm.) | Cumul |
-|---|---|---|
-| **Parties génitales** | 20 → 8 → 21 → 12 → 8 | 38 |
-| **Les 10 doigts** | 10 → 3 → 10 → 16 → 11 | 25 |
-| **Parole et mastication** | 7 → 12 → 1 → 7 → 9 | 24 |
-| **Les 2 pieds** | 8 → 18 → 15 → 9 → 5 | 23 |
-| Ouïe d'une oreille | 22 → 25 → 20 → 14 → 21 | 21 |
-| Vue d'un œil | 19 → 22 → 18 → 11 → 18 | 21 |
+### Les parties qui bougent le plus (amplitude, tous critères comparés)
+| Partie | Rangs (Diff. → Colère → Gratitude → Prix → Dédomm.) | Meilleur → pire | Amplitude | Zigzag |
+|---|---|---|---|---|
+| **Parties génitales** | 20 → 8 → 21 → 12 → 8 | 8 (Colère) → 21 (Gratitude) | 13 | 38 |
+| **Les 2 pieds** | 8 → 18 → 15 → 9 → 5 | 5 (Dédomm.) → 18 (Colère) | 13 | 23 |
+| **Les 10 doigts** | 10 → 3 → 10 → 16 → 11 | 3 (Colère) → 16 (Prix) | 13 | 25 |
+| **Parole et mastication** | 7 → 12 → 1 → 7 → 9 | 1 (Gratitude) → 12 (Colère) | 11 | 24 |
+| Vue d'un œil | 19 → 22 → 18 → 11 → 18 | 11 (Prix) → 22 (Colère) | 11 | 21 |
+| Ouïe d'une oreille | 22 → 25 → 20 → 14 → 21 | 14 (Prix) → 25 (Colère) | 11 | 21 |
+
+Les trois premières sont **ex æquo** à 13 places d'écart. Les parties génitales ne se distinguent que par le zigzag : elles montent et descendent plusieurs fois.
 
 Il y en a une par région : c'est ce choix qu'utilisent les graphiques, et c'est un réglage modifiable dans `graphiques.py`.
 
