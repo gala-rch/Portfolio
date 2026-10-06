@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css?v=20261006" />
+<link rel="stylesheet" href="../css/style.css?v=20261006b" />
 </head>
 <body data-theme="echo">
 
@@ -65,14 +65,9 @@
       <h2>Le film</h2>
       <div class="content">
         <div class="feed feed--film">
-          <span class="feed-tag">CAM 00 · ECHO</span>
+          <span class="feed-tag feed-tag--cover">CAM 00 · ECHO</span>
           <span class="feed-rec">REC</span>
-          <div class="echo-player" id="echo-player">
-            <img src="https://i.ytimg.com/vi/z5T_QfpyFnw/maxresdefault.jpg" alt="ECHO — court métrage" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/z5T_QfpyFnw/hqdefault.jpg'">
-            <button class="echo-play" type="button" aria-label="Lancer le film">
-              <svg viewBox="0 0 68 48" width="68" height="48" aria-hidden="true"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.7a8.6 8.6 0 0 0-6 6C0 13 0 24 0 24s0 11 1.5 16.3a8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7a8.6 8.6 0 0 0 6-6C68 35 68 24 68 24s0-11-1.5-16.3z" fill="#f00"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
-            </button>
-          </div>
+          <iframe id="echo-player" src="https://www.youtube-nocookie.com/embed/z5T_QfpyFnw?rel=0" title="ECHO — court métrage" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <a class="echo-jump" href="https://youtu.be/z5T_QfpyFnw?t=220" data-start="220">&gt; Voir mes animations dans le film · 3:40</a>
       </div>
@@ -215,18 +210,11 @@
 
 <script src="../js/main.js"></script>
 <script>
-  // YouTube is only loaded on click, so its title and channel overlay never show before playback
-  function playEcho(start) {
-    var player = document.getElementById('echo-player');
-    player.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/z5T_QfpyFnw?rel=0&autoplay=1&start=' + start +
-      '" title="ECHO — court métrage" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
-    player.closest('.feed').classList.add('is-playing');
-    player.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  document.querySelector('.echo-play').addEventListener('click', function () { playEcho(0); });
   document.querySelector('.echo-jump').addEventListener('click', function (e) {
     e.preventDefault();
-    playEcho(this.dataset.start);
+    var player = document.getElementById('echo-player');
+    player.src = 'https://www.youtube-nocookie.com/embed/z5T_QfpyFnw?rel=0&autoplay=1&start=' + this.dataset.start;
+    player.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 </script>
 </body>
