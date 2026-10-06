@@ -1092,8 +1092,8 @@ body[data-theme="echo"] .project-hero::before {
 /* AE renders sit on pure black: screen blending drops the black so the HUD floats on the page */
 .echo-hud {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   align-items: center;
   margin: 2rem 0 3rem;
 }
