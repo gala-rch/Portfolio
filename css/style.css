@@ -1037,6 +1037,37 @@ body[data-theme="echo"] .project-hero::before {
   50% { opacity: 0; }
 }
 
+.echo-player {
+  position: relative;
+}
+
+.echo-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(7, 11, 10, 0.75);
+  border: 1px solid var(--accent);
+  padding: 0.9rem 1.6rem;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(69, 229, 138, 0.25);
+}
+
+.echo-play:hover {
+  background: var(--accent);
+  color: #05130a;
+}
+
+.feed.is-playing .feed-tag,
+.feed.is-playing .feed-rec {
+  display: none;
+}
+
 .echo-jump {
   display: inline-block;
   margin-top: 1rem;
@@ -1092,8 +1123,8 @@ body[data-theme="echo"] .project-hero::before {
 /* AE renders sit on pure black: screen blending drops the black so the HUD floats on the page */
 .echo-hud {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
   align-items: center;
   margin: 2rem 0 3rem;
 }

@@ -67,7 +67,10 @@
         <div class="feed feed--film">
           <span class="feed-tag">CAM 00 · ECHO</span>
           <span class="feed-rec">REC</span>
-          <iframe id="echo-player" src="https://www.youtube-nocookie.com/embed/z5T_QfpyFnw?rel=0" title="ECHO — court métrage" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="echo-player" id="echo-player">
+            <img src="../assets/echo/mentor.webp" alt="ECHO — le mentor sous une lumière verte">
+            <button class="echo-play" type="button">&#9654; Lancer le film</button>
+          </div>
         </div>
         <a class="echo-jump" href="https://youtu.be/z5T_QfpyFnw?t=220" data-start="220">&gt; Voir mes animations dans le film · 3:40</a>
       </div>
@@ -149,11 +152,11 @@
         </p>
         <div class="echo-hud">
           <figure>
-            <video autoplay muted loop playsinline preload="metadata" aria-label="Animation de la balise N-ID2 : alerte Attention puis Excès d'alcool">
-            <source src="../assets/echo/badge.mp4" type="video/mp4">
-            <source src="../assets/echo/badge.webm" type="video/webm">
+            <video autoplay muted loop playsinline preload="metadata" aria-label="Hologramme complet de la puce : balise N-ID2, alerte Attention puis Excès d'alcool, constantes vitales et panneau de détection">
+            <source src="../assets/echo/hologramme.mp4" type="video/mp4">
+            <source src="../assets/echo/hologramme.webm" type="video/webm">
           </video>
-            <figcaption>&gt; VERSION PROPOSÉE · BALISE N-ID2</figcaption>
+            <figcaption>&gt; VERSION PROPOSÉE · HOLOGRAMME COMPLET</figcaption>
           </figure>
           <figure class="echo-hud-scan">
             <video autoplay muted loop playsinline preload="metadata" aria-label="Animation du scanner circulaire jusqu'à la connexion réussie">
@@ -210,11 +213,18 @@
 
 <script src="../js/main.js"></script>
 <script>
+  // YouTube is only loaded on click, so its title and channel overlay never show before playback
+  function playEcho(start) {
+    var player = document.getElementById('echo-player');
+    player.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/z5T_QfpyFnw?rel=0&autoplay=1&start=' + start +
+      '" title="ECHO — court métrage" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+    player.closest('.feed').classList.add('is-playing');
+    player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  document.querySelector('.echo-play').addEventListener('click', function () { playEcho(0); });
   document.querySelector('.echo-jump').addEventListener('click', function (e) {
     e.preventDefault();
-    var player = document.getElementById('echo-player');
-    player.src = 'https://www.youtube-nocookie.com/embed/z5T_QfpyFnw?rel=0&autoplay=1&start=' + this.dataset.start;
-    player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    playEcho(this.dataset.start);
   });
 </script>
 </body>
