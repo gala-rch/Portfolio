@@ -11,6 +11,8 @@ from xml.sax.saxutils import escape
 
 import pandas as pd
 
+import pictos
+
 ICI = Path(__file__).parent
 RES = ICI / "sorties" / "resultats_USA.xlsx"
 OUT = ICI / "maquette"
@@ -22,6 +24,7 @@ COND = "'Barlow Condensed', 'Arial Narrow', sans-serif"
 SERIF = "'Source Serif 4', Georgia, serif"
 FOND, ENCRE, ENCRE_2 = "#F7EFDF", "#1E1B18", "#6E665A"
 GRIS_CTX, GRIS_GRP = "#E3D9C6", "#A39A8A"
+PICTO = "#BDB3A2"            # gris des pictogrammes, discret
 
 # Région → (couleur, partie vedette)
 REGIONS = {
@@ -194,15 +197,36 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
         g.append(ruban(xs, ys, FOND, ep + 2))
         g.append(ruban(xs, ys, c, ep))
     # libellés : écartés s'ils se chevauchent, reliés à leur ruban par un filet
+    occupe = {-1: [], 1: []}       # y des libellés de chaque colonne (pour placer les pictos)
     for k, xl, sens in [(CRIT[0], x0, -1), (CRIT[-1], x1, 1)]:
         vrais = {p: Y(r[k]) for p, r in membres.iterrows()}
         for p, y in ecarter(list(vrais.items()), T_MINI * 1.08):
+            occupe[sens].append(y)
             fort = p == vedette or p in SECONDAIRE
             c, w = (ENCRE, "bold") if fort else (ENCRE_2, "normal")
             if abs(y - vrais[p]) > 0.8:
                 g.append(f'<polyline points="{xl + sens * 1.5:.1f},{vrais[p]:.1f} {xl + sens * 4:.1f},{vrais[p]:.1f} {xl + sens * 7:.1f},{y:.1f}" '
                          f'fill="none" stroke="{GRIS_GRP}" stroke-width="0.3"/>')
             g.append(t(xl + sens * 9, y + T_MINI * 0.35, p, T_MINI, COND, "end" if sens < 0 else "start", c, w))
+    # pictogrammes gris dans le plus grand espace libre des colonnes de libellés
+    def trous(sens):
+        ys = sorted(occupe[sens] + [top - 6, Y(35) + 6])
+        return [(b - a, a, b) for a, b in zip(ys, ys[1:])]
+    cols_libres = {-1: (ox, x0 - 9), 1: (x1 + 9, ox + pw)}
+    deja = []
+    for _, partie, _, _, _ in ANNOT[grp]:
+        choix = max(((h, a, b, sens) for sens in (-1, 1) if sens not in deja
+                     for h, a, b in trous(sens)), default=None)
+        if not choix:
+            continue
+        h, a, b, sens = choix
+        n = len(pictos.PICTO_DE[partie])
+        taille = min(30 if n == 1 else 24, h - 10, (cols_libres[sens][1] - cols_libres[sens][0] - 4) / n)
+        if taille < 14:
+            continue
+        deja.append(sens)
+        cx = sum(cols_libres[sens]) / 2
+        g.append(pictos.groupe(partie, cx, (a + b) / 2, taille, PICTO))
     # rang écrit au-dessus de chaque point du ruban coloré
     for x, k in zip(xs, CRIT):
         r = int(membres.loc[vedette, k])
