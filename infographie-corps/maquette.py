@@ -39,7 +39,7 @@ CRIT_COURT = ["Difficulté", "Colère", "Gratitude", "Prix", "Dédommag."]
 ANNOT = {
     "Fonctions & sens": [
         (1, "Parole et mastication", 2, "C'est après coup que l'on accorde du prix à notre bouche",
-         "Notre gratitude envers qui nous en rend l'usage est immense (1re), alors qu'on n'imaginait pas si dur de s'en passer (7e)."),
+         "Notre gratitude envers qui nous la rend est immense (1re), alors qu'on n'imaginait pas si dur de s'en passer (7e)."),
     ],
     "Bras & mains": [
         (2, "Les 10 doigts", 1, "On surréagit à la perte de nos 10 doigts",
@@ -53,7 +53,7 @@ ANNOT = {
     ],
     "Visage, dents & intimité": [
         (5, "Parties génitales", 1, "Le grand écart des parties génitales",
-         "On s'en passerait sans trop de difficulté (20e), mais leur perte nous révolte (8e) et appelle un gros dédommagement (8e)."),
+         "On s'en passerait sans trop de difficulté (20e), mais leur perte révolte (8e) et appelle un gros dédommagement (8e)."),
     ],
 }
 
@@ -69,7 +69,7 @@ def t(x, y, s, size, font=COND, anchor="start", fill=ENCRE, weight="normal", sty
 
 def para(x, y, s, size, largeur, font=SERIF, interligne=1.3, **kw):
     """Texte sur plusieurs lignes (coupure approximative par nombre de caractères)."""
-    max_car = int(largeur / (size * 0.47))
+    max_car = int(largeur / (size * 0.5))
     lignes, cur = [], ""
     for mot in s.split():
         if len(cur) + len(mot) + 1 > max_car and cur:
@@ -263,10 +263,12 @@ def main():
 
     # bas de page : on le place d'abord pour savoir quelle hauteur reste aux graphiques
     folio_y = H - 16
-    bas_h = 84
+    # encadré hommes/femmes retiré pour laisser la place aux graphiques
+    # (la fonction hommes_femmes() reste disponible plus haut si besoin)
+    _, fin = sources(M, 0, L - 2 * M)
+    bas_h = fin + 2
     bas_y = folio_y - 12 - bas_h
-    hf, _ = hommes_femmes(M, bas_y + T_INTER, pw)
-    so, _ = sources(M + pw + gouttiere, bas_y + T_INTER, pw)
+    so, _ = sources(M, bas_y + T_INTER, L - 2 * M)
 
     # hauteur des en-têtes de panneaux (titre + annotations), par rangée
     def entete_h(grp):
@@ -285,7 +287,7 @@ def main():
             corps.append(panneau(rangs, grp, M + i * (pw + gouttiere), oy, pw, top, ch))
         oy = top + ch + 8 + 12
     corps.append(f'<line x1="{M}" y1="{bas_y - 6}" x2="{L - M}" y2="{bas_y - 6}" stroke="{ENCRE}" stroke-width="0.4"/>')
-    corps += [hf, so]
+    corps.append(so)
     corps.append(t(M, folio_y, "38  |  Pour vous abonner : epsiloon.com", T_MINI, COND, fill=ENCRE_2))
     corps.append(t(L - M, folio_y, "PAR [TON NOM], D'APRÈS LÉA DESRAYAUD", T_MINI, COND, "end", ENCRE_2))
     print(f"Hauteur d'un graphique : {ch:.0f} pt, soit {ch / 34:.1f} pt entre deux rangs")
