@@ -79,20 +79,16 @@ Dans le SVG, chaque ligne de texte est un objet séparé : impossible de modifie
 
    | Bloc | Police | Taille / interligne |
    |---|---|---|
-   | Chapô | Source Serif 4 | 10 pt / 13 pt |
-   | Titre d'annotation | Barlow Condensed Bold | 8 pt |
-   | Texte d'annotation | Source Serif 4 | 7 pt / 9 pt |
-   | Sources | Source Serif 4 | 7 pt / 9 pt |
+   | Chapô | Source Serif 4 | 10,5 pt / 13,5 pt |
+   | Titre d'annotation | Barlow Condensed Bold | 9,5 pt |
+   | Texte d'annotation | Source Serif 4 | 8 pt / 10,5 pt |
+   | Sources | Source Serif 4 | 8 pt / 10,5 pt |
 
 5. Si un petit **＋ rouge** apparaît en bas de la zone, le texte déborde : agrandis la zone.
 6. « 1re », « 3e » : sélectionne « re » ou « e », puis dans le menu (≡) du panneau Character, choisis **Superscript**.
 
-## 7. Agrandir les noms des petites parties
-Ils font 5,8 pt : trop petit à l'impression.
-1. Avec la flèche blanche (**A**), clique sur un nom gris (ex. « Bras »).
-2. **Select > Same > Font Size**.
-3. Dans Character, passe la taille à **6,5 pt**.
-4. Corrige les chevauchements à la main avec les **flèches du clavier** (**Shift+flèche** = grand déplacement). Pour les noms très serrés (orteils, doigts), écarte-les et relie chacun à sa ligne par un filet très fin (0,25 pt).
+## 7. Noms des petites parties
+Ils sont déjà à 7 pt, la taille minimale. Si deux noms se touchent, décale-les avec les **flèches du clavier**. Chacun est relié à sa ligne par un filet fin.
 
 ## 8. Ajouter 4 pictogrammes
 Un par panneau, à côté du titre :
