@@ -60,6 +60,9 @@ ANNOT = {
 
 # ---------------------------------------------------------------- outils
 def t(x, y, s, size, font=COND, anchor="start", fill=ENCRE, weight="normal", style=""):
+    # Illustrator retrouve mieux une police par son nom PostScript que par famille + graisse
+    if font == COND and weight == "bold":
+        font = "BarlowCondensed-Bold, " + COND
     return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{font}" font-size="{size}" '
             f'font-weight="{weight}" text-anchor="{anchor}" fill="{fill}"{style}>{escape(str(s))}</text>')
 
