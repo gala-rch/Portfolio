@@ -117,16 +117,23 @@ T_TITRE = 46        # titre
 INTERLIGNE = 1.3
 
 
+TAILLE_PICTO = 26      # côté d'un pictogramme, en pt
+
+
 def bloc_annotations(grp, x, y, w, rendu=True):
-    """Annotations d'un panneau ; renvoie (svg, y de fin)."""
+    """Annotations d'un panneau, chacune avec son pictogramme à droite ; renvoie (svg, y de fin)."""
     col, vedette = REGIONS[grp]
     g = []
     for _, partie, _, titre, texte in ANNOT[grp]:
         c = col if partie == vedette else SECONDAIRE.get(partie, col)
+        n = len(pictos.PICTO_DE[partie])
+        zone = TAILLE_PICTO * n + 2 * (n - 1) + 10       # largeur réservée au picto
         y0 = y
         g.append(t(x + 11, y, titre, T_INTER, COND, weight="bold"))
-        p, y = para(x + 11, y + T_TEXTE * 1.45, texte, T_TEXTE, w - 11)
+        p, y = para(x + 11, y + T_TEXTE * 1.45, texte, T_TEXTE, w - 11 - zone)
         g.append(p)
+        haut = y0 - T_INTER * 0.8
+        g.append(pictos.groupe(partie, x + w - (zone - 10) / 2, (haut + y - 2) / 2, TAILLE_PICTO, PICTO))
         g.append(f'<rect x="{x}" y="{y0 - T_INTER * 0.8:.1f}" width="2.5" height="{y - y0 + T_INTER * 0.5:.1f}" fill="{c}"/>')
         y += 7
     return "\n".join(g), y
@@ -208,25 +215,6 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
                 g.append(f'<polyline points="{xl + sens * 1.5:.1f},{vrais[p]:.1f} {xl + sens * 4:.1f},{vrais[p]:.1f} {xl + sens * 7:.1f},{y:.1f}" '
                          f'fill="none" stroke="{GRIS_GRP}" stroke-width="0.3"/>')
             g.append(t(xl + sens * 9, y + T_MINI * 0.35, p, T_MINI, COND, "end" if sens < 0 else "start", c, w))
-    # pictogrammes gris dans le plus grand espace libre des colonnes de libellés
-    def trous(sens):
-        ys = sorted(occupe[sens] + [top - 6, Y(35) + 6])
-        return [(b - a, a, b) for a, b in zip(ys, ys[1:])]
-    cols_libres = {-1: (ox, x0 - 9), 1: (x1 + 9, ox + pw)}
-    deja = []
-    for _, partie, _, _, _ in ANNOT[grp]:
-        choix = max(((h, a, b, sens) for sens in (-1, 1) if sens not in deja
-                     for h, a, b in trous(sens)), default=None)
-        if not choix:
-            continue
-        h, a, b, sens = choix
-        n = len(pictos.PICTO_DE[partie])
-        taille = min(30 if n == 1 else 24, h - 10, (cols_libres[sens][1] - cols_libres[sens][0] - 4) / n)
-        if taille < 14:
-            continue
-        deja.append(sens)
-        cx = sum(cols_libres[sens]) / 2
-        g.append(pictos.groupe(partie, cx, (a + b) / 2, taille, PICTO))
     # rang écrit au-dessus de chaque point du ruban coloré
     for x, k in zip(xs, CRIT):
         r = int(membres.loc[vedette, k])
