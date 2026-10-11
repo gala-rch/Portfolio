@@ -8,8 +8,13 @@ Les raccourcis sont ceux de Windows (Ctrl, Alt, Shift). Les menus sont en anglai
 
 ---
 
-## 0. Polices : déjà fait ✅
-Barlow Condensed (Regular + Bold) et Source Serif 4 doivent être installées. Si Illustrator les affiche, passe à l'étape 1.
+## 0. Polices
+Il faut 3 polices, toutes gratuites sur fonts.google.com :
+- **Barlow Condensed** (Regular + Bold) : titres et intertitres.
+- **Barlow Semi Condensed** (Regular + SemiBold) : petits textes des graphiques (noms des parties, colonnes, rangs). Elle est moins serrée, donc plus lisible en 7 pt.
+- **Source Serif 4** : chapô, annotations, sources.
+
+Installe les `.ttf` (clic droit > Install), puis quitte et relance Illustrator.
 
 ## 1. Ouvrir et enregistrer TOUT DE SUITE en .ai
 1. **File > Open** → `maquette_A4.svg`.

@@ -22,6 +22,8 @@ L, H = 595, 842
 M = 34                                   # marge 12 mm
 COND = "'Barlow Condensed', 'Arial Narrow', sans-serif"
 SERIF = "'Source Serif 4', Georgia, serif"
+# Petits textes (≤ 7,5 pt) : même famille que les titres, mais moins serrée → plus lisible
+SEMI = "'Barlow Semi Condensed', 'Barlow Condensed', Arial, sans-serif"
 FOND, ENCRE, ENCRE_2 = "#F7EFDF", "#1E1B18", "#6E665A"
 GRIS_CTX, GRIS_GRP = "#E3D9C6", "#A39A8A"
 PICTO = "#BDB3A2"            # gris des pictogrammes, discret
@@ -66,6 +68,9 @@ def t(x, y, s, size, font=COND, anchor="start", fill=ENCRE, weight="normal", sty
     # Illustrator retrouve mieux une police par son nom PostScript que par famille + graisse
     if font == COND and weight == "bold":
         font = "BarlowCondensed-Bold, " + COND
+    elif font == SEMI and weight == "bold":
+        font = "BarlowSemiCondensed-SemiBold, " + SEMI
+        weight = "600"
     return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{font}" font-size="{size}" '
             f'font-weight="{weight}" text-anchor="{anchor}" fill="{fill}"{style}>{escape(str(s))}</text>')
 
@@ -185,7 +190,7 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
     Y = lambda r: top + (r - 1) * pas
     for x, c in zip(xs, CRIT_COURT):
         g.append(f'<line x1="{x:.1f}" y1="{top - 5:.1f}" x2="{x:.1f}" y2="{Y(35) + 4:.1f}" stroke="{ENCRE_2}" stroke-width="0.3" stroke-dasharray="0.8 1.6"/>')
-        g.append(t(x, top - 14, c, T_MINI, COND, "middle", ENCRE_2))
+        g.append(t(x, top - 14, c, T_MINI, SEMI, "middle", ENCRE_2))
     membres = rangs[rangs.groupe == grp]
     for p, r in rangs[rangs.groupe != grp].iterrows():
         g.append(ruban(xs, [Y(r[c]) for c in CRIT], GRIS_CTX, 0.8))
@@ -207,7 +212,7 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
             if abs(y - vrais[p]) > 0.8:
                 g.append(f'<polyline points="{xl + sens * 1.5:.1f},{vrais[p]:.1f} {xl + sens * 4:.1f},{vrais[p]:.1f} {xl + sens * 7:.1f},{y:.1f}" '
                          f'fill="none" stroke="{GRIS_GRP}" stroke-width="0.3"/>')
-            g.append(t(xl + sens * 9, y + T_MINI * 0.35, p, T_MINI, COND, "end" if sens < 0 else "start", c, w))
+            g.append(t(xl + sens * 9, y + T_MINI * 0.35, p, T_MINI, SEMI, "end" if sens < 0 else "start", c, w))
     # pictogrammes gris dans le plus grand espace libre des colonnes de libellés
     def trous(sens):
         ys = sorted(occupe[sens] + [top - 6, Y(35) + 6])
@@ -231,7 +236,7 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
     for x, k in zip(xs, CRIT):
         r = int(membres.loc[vedette, k])
         g.append(f'<circle cx="{x:.1f}" cy="{Y(r):.1f}" r="2.6" fill="{col}" stroke="{FOND}" stroke-width="0.7"/>')
-        g.append(t(x, Y(r) - 4.8, r, T_MINI + 0.5, COND, "middle", ENCRE, "bold"))
+        g.append(t(x, Y(r) - 4.8, r, T_MINI + 0.5, SEMI, "middle", ENCRE, "bold"))
     g.append("</g>")
     return "\n".join(g)
 
@@ -312,8 +317,8 @@ def main():
         oy = top + ch + 8 + 12
     corps.append(f'<line x1="{M}" y1="{bas_y - 6}" x2="{L - M}" y2="{bas_y - 6}" stroke="{ENCRE}" stroke-width="0.4"/>')
     corps.append(so)
-    corps.append(t(M, folio_y, "38  |  Pour vous abonner : epsiloon.com", T_MINI, COND, fill=ENCRE_2))
-    corps.append(t(L - M, folio_y, "PAR [TON NOM], D'APRÈS LÉA DESRAYAUD", T_MINI, COND, "end", ENCRE_2))
+    corps.append(t(M, folio_y, "38  |  Pour vous abonner : epsiloon.com", T_MINI, SEMI, fill=ENCRE_2))
+    corps.append(t(L - M, folio_y, "PAR [TON NOM], D'APRÈS LÉA DESRAYAUD", T_MINI, SEMI, "end", ENCRE_2))
     print(f"Hauteur d'un graphique : {ch:.0f} pt, soit {ch / 34:.1f} pt entre deux rangs")
     svg = (f'<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" '
            f'width="{L}pt" height="{H}pt" viewBox="0 0 {L} {H}">\n{style}\n'
