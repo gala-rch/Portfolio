@@ -25,12 +25,18 @@ TRAIT = {
     ],
 }
 
+# Dessins composés (contour + formes pleines), coordonnées dans la boîte 256 × 256.
+# Pieds nus : dessinés pour ce projet ({c} = couleur).
+BRUT = {
+    "pieds_nus": '<g transform="translate(124,0) scale(-1,1)"><path d="M58,250 C40,250 32,236 33,214 C34,190 28,170 26,148 C24,124 22,108 30,98 C40,86 70,84 90,92 C104,98 106,112 100,126 C92,144 82,160 84,186 C86,210 84,250 58,250 Z" fill="none" stroke="{c}" stroke-width="11" stroke-linejoin="round"/><ellipse cx="87" cy="63" rx="12" ry="15" fill="{c}"/><ellipse cx="62" cy="53" rx="8" ry="10" fill="{c}"/><ellipse cx="43" cy="59" rx="7" ry="8.5" fill="{c}"/><ellipse cx="29" cy="71" rx="6" ry="7" fill="{c}"/><ellipse cx="20" cy="87" rx="5" ry="6" fill="{c}"/></g><g transform="translate(132,8)"><path d="M58,250 C40,250 32,236 33,214 C34,190 28,170 26,148 C24,124 22,108 30,98 C40,86 70,84 90,92 C104,98 106,112 100,126 C92,144 82,160 84,186 C86,210 84,250 58,250 Z" fill="none" stroke="{c}" stroke-width="11" stroke-linejoin="round"/><ellipse cx="87" cy="63" rx="12" ry="15" fill="{c}"/><ellipse cx="62" cy="53" rx="8" ry="10" fill="{c}"/><ellipse cx="43" cy="59" rx="7" ry="8.5" fill="{c}"/><ellipse cx="29" cy="71" rx="6" ry="7" fill="{c}"/><ellipse cx="20" cy="87" rx="5" ry="6" fill="{c}"/></g>',
+}
+
 # Partie annotée → pictogramme(s) (« main ×2 » = deux mains pour les 10 doigts)
 PICTO_DE = {
     "Parole et mastication": ["levres"],
     "Les 10 doigts": ["main", "main_miroir"],
     "Pouce": ["pouce"],
-    "Les 2 pieds": ["pieds"],
+    "Les 2 pieds": ["pieds_nus"],
     "Parties génitales": ["femme", "homme"],
 }
 
@@ -42,6 +48,8 @@ def dessin(nom, x, y, taille, couleur):
     k = taille / 256
     tr = (f"translate({x + taille:.1f},{y:.1f}) scale({-k:.4f},{k:.4f})" if miroir
           else f"translate({x:.1f},{y:.1f}) scale({k:.4f})")
+    if nom in BRUT:
+        return f'<g transform="{tr} translate(0,-20)">' + BRUT[nom].replace("{c}", couleur) + "</g>"
     if nom in PLEIN:
         return f'<path transform="{tr}" d="{PLEIN[nom]}" fill="{couleur}"/>'
     return "".join(f'<path transform="{tr}" d="{d}" fill="none" stroke="{couleur}" stroke-width="12" '
