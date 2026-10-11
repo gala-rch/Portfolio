@@ -33,7 +33,7 @@ REGIONS = {
     "Fonctions & sens":         ("#CC3D2A", "Parole et mastication"),
     "Bras & mains":             ("#1A7BB0", "Les 10 doigts"),
     "Jambes & pieds":           ("#D99200", "Les 2 pieds"),
-    "Visage, dents & intimité": ("#5F7A35", "Visage"),
+    "Visage, dents & intimité": ("#7D3FA0", "Parties génitales"),
 }
 SECONDAIRE = {"Pouce": "#4E473E"}        # partie annotée sans couleur vive
 CRIT = ["Difficulté à s'en passer", "Colère si on en perd l'usage",
@@ -57,8 +57,8 @@ ANNOT = {
          "Les perdre nous met peu en colère (18e), mais on réclame pour eux un fort dédommagement (5e)."),
     ],
     "Visage, dents & intimité": [
-        (5, "Visage", 3, "Le visage, une perte qui coûte cher",
-         "Vivre défiguré semble peu difficile (13e), mais le visage est l'une des parties les plus chères à racheter (4e)."),
+        (5, "Parties génitales", 1, "Le grand écart des parties génitales",
+         "On s'en passerait sans trop de difficulté (20e), mais leur perte révolte (8e) et appelle un gros dédommagement (8e)."),
     ],
 }
 
@@ -183,7 +183,6 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
          t(ox + T_PANNEAU * 1.1, oy + T_PANNEAU * 0.75, grp.upper(), T_PANNEAU, COND, weight="bold")]
     a, _ = bloc_annotations(grp, ox + 2, oy + T_PANNEAU + 11, pw - 2)
     g.append(a)
-    g.append(f'<g id="graphique-{grp.split()[0].lower()}">')
 
     pas = ch / 34
     x0, x1 = ox + 74, ox + pw - 74
@@ -238,7 +237,6 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
         r = int(membres.loc[vedette, k])
         g.append(f'<circle cx="{x:.1f}" cy="{Y(r):.1f}" r="2.6" fill="{col}" stroke="{FOND}" stroke-width="0.7"/>')
         g.append(t(x, Y(r) - 4.8, r, T_MINI + 0.5, SEMI, "middle", ENCRE, "bold"))
-    g.append("</g>")   # fin du graphique
     g.append("</g>")
     return "\n".join(g)
 
