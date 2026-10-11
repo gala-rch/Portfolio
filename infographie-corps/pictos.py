@@ -28,7 +28,7 @@ TRAIT = {
 # Dessins composés (contour + formes pleines), coordonnées dans la boîte 256 × 256.
 # Pieds nus : dessinés pour ce projet ({c} = couleur).
 BRUT = {
-    "pieds_nus": '<g transform="translate(124,0) scale(-1,1)"><path d="M58,250 C40,250 32,236 33,214 C34,190 28,170 26,148 C24,124 22,108 30,98 C40,86 70,84 90,92 C104,98 106,112 100,126 C92,144 82,160 84,186 C86,210 84,250 58,250 Z" fill="none" stroke="{c}" stroke-width="11" stroke-linejoin="round"/><ellipse cx="87" cy="63" rx="12" ry="15" fill="{c}"/><ellipse cx="62" cy="53" rx="8" ry="10" fill="{c}"/><ellipse cx="43" cy="59" rx="7" ry="8.5" fill="{c}"/><ellipse cx="29" cy="71" rx="6" ry="7" fill="{c}"/><ellipse cx="20" cy="87" rx="5" ry="6" fill="{c}"/></g><g transform="translate(132,8)"><path d="M58,250 C40,250 32,236 33,214 C34,190 28,170 26,148 C24,124 22,108 30,98 C40,86 70,84 90,92 C104,98 106,112 100,126 C92,144 82,160 84,186 C86,210 84,250 58,250 Z" fill="none" stroke="{c}" stroke-width="11" stroke-linejoin="round"/><ellipse cx="87" cy="63" rx="12" ry="15" fill="{c}"/><ellipse cx="62" cy="53" rx="8" ry="10" fill="{c}"/><ellipse cx="43" cy="59" rx="7" ry="8.5" fill="{c}"/><ellipse cx="29" cy="71" rx="6" ry="7" fill="{c}"/><ellipse cx="20" cy="87" rx="5" ry="6" fill="{c}"/></g>',
+    "pieds_nus": '<g fill="none" stroke="{c}" stroke-width="9" stroke-linejoin="round"><g transform="translate(128,0) scale(-1,1)"><path d="M64,262 C46,262 38,248 36,228 C33,200 22,170 19,140 C16,112 32,90 62,88 C92,86 110,100 108,124 C106,146 80,158 78,182 C76,202 92,216 92,236 C92,254 80,262 64,262 Z"/><ellipse cx="36" cy="58" rx="14" ry="18"/><ellipse cx="66" cy="38" rx="10" ry="12.5"/><ellipse cx="91" cy="39" rx="7.5" ry="9.5"/><ellipse cx="111" cy="51" rx="6.5" ry="8"/><ellipse cx="124" cy="70" rx="5.5" ry="6.5"/></g><g transform="translate(144,0)"><path d="M64,262 C46,262 38,248 36,228 C33,200 22,170 19,140 C16,112 32,90 62,88 C92,86 110,100 108,124 C106,146 80,158 78,182 C76,202 92,216 92,236 C92,254 80,262 64,262 Z"/><ellipse cx="36" cy="58" rx="14" ry="18"/><ellipse cx="66" cy="38" rx="10" ry="12.5"/><ellipse cx="91" cy="39" rx="7.5" ry="9.5"/><ellipse cx="111" cy="51" rx="6.5" ry="8"/><ellipse cx="124" cy="70" rx="5.5" ry="6.5"/></g></g>',
 }
 
 # Partie annotée → pictogramme(s) (« main ×2 » = deux mains pour les 10 doigts)
@@ -49,7 +49,7 @@ def dessin(nom, x, y, taille, couleur):
     tr = (f"translate({x + taille:.1f},{y:.1f}) scale({-k:.4f},{k:.4f})" if miroir
           else f"translate({x:.1f},{y:.1f}) scale({k:.4f})")
     if nom in BRUT:
-        return f'<g transform="{tr} translate(0,-20)">' + BRUT[nom].replace("{c}", couleur) + "</g>"
+        return f'<g transform="{tr} scale(0.9) translate(3,-22)">' + BRUT[nom].replace("{c}", couleur) + "</g>"
     if nom in PLEIN:
         return f'<path transform="{tr}" d="{PLEIN[nom]}" fill="{couleur}"/>'
     return "".join(f'<path transform="{tr}" d="{d}" fill="none" stroke="{couleur}" stroke-width="12" '
