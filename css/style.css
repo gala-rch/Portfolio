@@ -166,6 +166,41 @@ p {
   top: 6px;
 }
 
+/* ---------- Sélecteur de langue ---------- */
+
+.site-header nav {
+  margin-left: auto;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  margin-left: 2rem;
+  padding-left: 1.4rem;
+  border-left: 1px solid var(--line);
+}
+
+.lang-switch a {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.35rem 0.4rem 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.lang-switch a:hover {
+  color: var(--fg);
+}
+
+.lang-switch a[aria-current] {
+  color: var(--fg);
+  border-color: var(--accent);
+}
+
 /* ---------- Hero ---------- */
 
 .hero {
@@ -811,9 +846,14 @@ p {
 }
 
 @media (max-width: 720px) {
+  /* le header a un backdrop-filter : il sert de repère au menu */
   .nav-links {
-    position: fixed;
-    inset: 76px 0 0 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 76px);
+    height: calc(100dvh - 76px);
     background: var(--bg);
     flex-direction: column;
     padding: 2rem var(--gutter);
@@ -836,6 +876,12 @@ p {
 
   .nav-toggle {
     display: inline-flex;
+  }
+
+  .lang-switch {
+    margin: 0 0.7rem 0 0;
+    padding-left: 0;
+    border-left: 0;
   }
 
   .project-grid {
