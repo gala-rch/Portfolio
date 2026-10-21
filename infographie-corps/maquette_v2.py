@@ -23,8 +23,9 @@ COULEURS = {
     "Jambes & pieds": "#B9934A",
     "Visage, dents & intimité": "#646444",
 }
-LARG_LIBELLES = 66        # colonne des noms à gauche
-LARG_ANNOT = 78           # colonne des annotations à droite
+LARG_LIBELLES = 80        # colonne des noms à gauche (noms en 8 pt)
+T_LIB = 8                 # taille des noms des parties
+LARG_ANNOT = 74           # colonne des annotations à droite
 ECART = 10                # entre le graphique et l'annotation
 
 
@@ -45,7 +46,7 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
     Y = lambda r: top + (r - 1) * pas
 
     g.append(f'<g id="graphique-{grp.split()[0].lower()}">')
-    for x, c in zip(xs, CRIT_COURT):
+    for x, c in zip(xs, ["Difficulté", "Colère", "Gratitude", "Prix", "Dédomm."]):
         g.append(f'<line x1="{x:.1f}" y1="{top - 5:.1f}" x2="{x:.1f}" y2="{Y(35) + 4:.1f}" stroke="{ENCRE_2}" stroke-width="0.3" stroke-dasharray="0.8 1.6"/>')
         g.append(t(x, top - 14, c, T_MINI, COND, "middle", ENCRE_2))   # condensé : 5 mots courts dans une colonne étroite
     membres = rangs[rangs.groupe == grp]
@@ -59,17 +60,17 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
     g.append(ruban(xs, ys, col, 3.2))
     # noms à gauche seulement
     vrais = {p: Y(r[CRIT[0]]) for p, r in membres.iterrows()}
-    for p, y in ecarter(list(vrais.items()), T_MINI * 1.15):
+    for p, y in ecarter(list(vrais.items()), T_LIB * 1.12):
         fort = p == vedette
         c, w = (ENCRE, "bold") if fort else (ENCRE_2, "normal")
         if abs(y - vrais[p]) > 0.8:
             g.append(f'<polyline points="{x0 - 1.5:.1f},{vrais[p]:.1f} {x0 - 4:.1f},{vrais[p]:.1f} {x0 - 7:.1f},{y:.1f}" '
                      f'fill="none" stroke="{GRIS_GRP}" stroke-width="0.3"/>')
-        g.append(t(x0 - 9, y + T_MINI * 0.35, p, T_MINI, SEMI, "end", c, w))
+        g.append(t(x0 - 9, y + T_LIB * 0.35, p, T_LIB, SEMI, "end", c, w))
     for x, kk in zip(xs, CRIT):
         r = int(membres.loc[vedette, kk])
         g.append(f'<circle cx="{x:.1f}" cy="{Y(r):.1f}" r="2.8" fill="{col}" stroke="{FOND}" stroke-width="0.7"/>')
-        g.append(t(x, Y(r) - 5, r, T_MINI + 0.5, SEMI, "middle", ENCRE, "bold"))
+        g.append(t(x, Y(r) - 5.5, r, T_LIB + 0.5, SEMI, "middle", ENCRE, "bold"))
     g.append("</g>")
 
     # annotation à droite, alignée sur le point qu'elle commente, reliée par un trait
