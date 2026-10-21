@@ -91,19 +91,60 @@ def panneau(rangs, grp, ox, oy, pw, top, ch):
     return "\n".join(g)
 
 
+def entete_v2():
+    """En-tête sans bandeau : la règle de lecture passe à la fin du chapô."""
+    from maquette import T_RUBRIQUE, T_TITRE, T_CHAPO
+    y = M + T_RUBRIQUE * 0.8
+    g = ['<g id="entete">', t(M, y, "Big data", T_RUBRIQUE, SERIF, weight="bold")]
+    y += 7
+    g.append(f'<line x1="{M}" y1="{y}" x2="{L - M}" y2="{y}" stroke="{ENCRE}" stroke-width="0.6"/>')
+    y += T_TITRE * 0.95
+    g.append(t(M, y, "Ce que vaut notre corps", T_TITRE, COND, weight="bold"))
+    chapo = ("Plus d'un million de dollars pour notre motricité ou nos capacités mentales, quelques centaines pour un ongle : "
+             "282 Américains ont estimé la valeur de 35 parties de leur corps selon cinq critères. Leur classement, "
+             "proche de celui des codes légaux, change peu… sauf pour quelques parties.")
+    p, y = para(M, y + T_CHAPO * 1.8, chapo, T_CHAPO, L - 2 * M)
+    g.append(p)
+    g.append(t(M, y + 2, "Chaque ruban suit une partie du corps d'un critère à l'autre : plus il est haut, plus elle est jugée précieuse (rang 1 à 35).",
+               T_TEXTE, SERIF, fill=ENCRE_2, style=' font-style="italic"'))
+    g.append("</g>")
+    return "\n".join(g), y + 2
+
+
+def comment_lire_bas(x, y, w):
+    """Les 5 critères, une ligne chacun, en bas de page."""
+    defs = [("Difficulté", "à vivre sans cette partie"),
+            ("Colère", "si un tiers nous la fait perdre"),
+            ("Gratitude", "envers qui nous la rend"),
+            ("Prix", "sur un marché fictif"),
+            ("Dédommagement", "qu'un juge devrait verser")]
+    g = ['<g id="comment-lire">', t(x, y, "LES CINQ CRITÈRES", T_INTER, COND, weight="bold")]
+    yy = y + T_TEXTE * 1.6
+    for i, (a, b) in enumerate(defs):
+        g.append(f'<text x="{x}" y="{yy:.1f}" font-size="{T_TEXTE}" fill="{ENCRE}">'
+                 f'<tspan font-family="BarlowCondensed-Bold, {COND}" font-weight="bold" font-size="{T_TEXTE + 0.5}">{i + 1}. {a}</tspan>'
+                 f'<tspan font-family="{SERIF}" fill="{ENCRE_2}"> {b}</tspan></text>')
+        yy += T_TEXTE * 1.3
+    g.append("</g>")
+    return "\n".join(g), yy
+
+
 def main():
     rangs = pd.read_excel(m.RES, sheet_name="rangs", index_col=0)
     gouttiere = 20
     pw = (L - 2 * M - gouttiere) / 2
-    tete, y = entete()
-    cl, y = comment_lire(y + 12)
-    corps = [tete, cl]
+    tete, y = entete_v2()
+    corps = [tete]
     folio_y = H - 16
-    _, fin = sources(M, 0, L - 2 * M)
-    bas_y = folio_y - 12 - (fin + 2)
-    so, _ = sources(M, bas_y + T_INTER, L - 2 * M)
+    # bas de page en 2 colonnes : les 5 critères à gauche, les sources à droite
+    _, fin_cl = comment_lire_bas(M, 0, pw)
+    _, fin_so = sources(M, 0, pw)
+    bas_y = folio_y - 12 - (max(fin_cl, fin_so) + 2)
+    cl, _ = comment_lire_bas(M, bas_y + T_INTER, pw)
+    so, _ = sources(M + pw + gouttiere, bas_y + T_INTER, pw)
+    corps.append(cl)
 
-    haut = y + 16
+    haut = y + 22
     tete_panneau = T_PANNEAU + 26          # titre + en-têtes de colonnes
     ch = (bas_y - 12 - haut - 14 - 2 * (tete_panneau + 8)) / 2
     oy = haut
