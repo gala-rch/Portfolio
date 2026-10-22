@@ -662,6 +662,20 @@ p {
   }
 }
 
+/* Sur téléphone : deux par ligne au lieu d'une colonne collée à gauche */
+@media (max-width: 720px) {
+  .scatter-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 1.6rem 1.2rem;
+  }
+}
+
+model-viewer {
+  display: block;
+}
+
 /* A real photo among the cutouts: framed like a print, not floating like the cutouts */
 .scatter-board .scatter-item--photo img {
   filter: none;
@@ -1206,6 +1220,21 @@ body[data-theme="echo"] .project-hero::before {
 
   .echo-pair .feed:nth-child(2) {
     margin-top: 0;
+  }
+
+  /* sur téléphone, les deux images d'un même moment l'une sous l'autre */
+  .echo-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .feed-tag--cover {
+    top: 8px;
+    left: 8px;
+    height: 64px;
+    gap: 0.6rem;
+    padding: 0 0.8rem;
+    font-size: 0.7rem;
+    white-space: nowrap;
   }
 }
 
